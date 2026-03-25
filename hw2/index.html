@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HW#2 資工選課表</title>
+    <style>
+        table { font-family: Arial, Helvetica, sans-serif; border-collapse: collapse; width: 100%; cursor: pointer; }
+        td, th { border: 1px solid #ddd; padding: 6px; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+        th { padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white; }
+
+        button { margin: 20px 0; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+
+        #coursePopover {
+            display: none;
+            position: fixed;
+            top: 20%;
+            right: 50px;
+            width: 350px;
+            background: #fff;
+            border: 1px solid #999;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1000;
+        }
+        .pop-title { font-weight: bold; font-size: 18px; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+        .pop-item { margin: 5px 0; font-size: 14px; }
+        .red-text { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>資工選課表 (HW#2)</h2>
+
+    <!-- 依照簡報 Page 80：設定 id="csie" -->
+    <table id="csie">
+        <thead>
+            <tr>
+                <th>開課單位</th>
+                <th>課程名稱</th>
+                <th>授課教師</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="openInfo('物件導向軟體設計', '黃崇源', 'A2337')"><td>資工系</td><td>物件導向軟體設計</td><td>黃崇源</td></tr>
+            <tr onclick="openInfo('計算機網路實驗', '李春良', 'B1234')"><td>資工系</td><td>計算機網路實驗</td><td>李春良</td></tr>
+            <tr onclick="openInfo('作業系統實務', '張哲維', 'C5678')"><td>資工系</td><td>作業系統實務</td><td>張哲維</td></tr>
+            <tr onclick="openInfo('生物統計', '陳光武', 'D9012')"><td>資工系</td><td>生物統計</td><td>陳光武</td></tr>
+            <tr onclick="openInfo('通訊系統', '陳仁暉', 'E3456')"><td>資工系</td><td>通訊系統</td><td>陳仁暉</td></tr>
+            <tr onclick="openInfo('軟硬體專題(2)', '魏志達', 'F7890')"><td>資工系</td><td>軟硬體專題(2)</td><td>魏志達</td></tr>
+        </tbody>
+    </table>
+
+    <button onclick="changeResult()">Change</button>
+
+    <div id="coursePopover">
+        <div class="pop-title">課程詳細資料 🖨️</div>
+        <div id="popContent"></div>
+        <button style="width:100%; margin-top:10px;" onclick="document.getElementById('coursePopover').style.display='none'">關閉</button>
+    </div>
+
+    <script>
+        function changeResult() {
+            var myTable = document.getElementById("csie");
+            myTable.rows[1].cells[2].innerHTML = "李春良";
+        }
+
+        // 實作 Click + popover 詳情功能
+        function openInfo(title, teacher, code) {
+            var pop = document.getElementById("coursePopover");
+            var content = document.getElementById("popContent");
+            
+            content.innerHTML = `
+                <div class="pop-item">學年/學期: 114/2</div>
+                <div class="pop-item">授課教師: ${teacher}</div>
+                <div class="pop-item">開課單位: 資工系</div>
+                <div class="pop-item">課程名稱: ${title}</div>
+                <div class="pop-item">開課序號: <span class="red-text">${code}</span></div>
+                <div class="pop-item">地點: 資工系電腦教室2</div>
+            `;
+            pop.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
+
+
