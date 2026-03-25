@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HW1 Course Table</title>
+<style>
+body{
+font-family:"Microsoft JhengHei", Arial, snas-serif;
+padding: 40px;
+background-color: #ffffff;
+}
+h2{
+color: #333;
+magrin-bottom: 20px;
+}
+table{
+width: 100%;
+border-collapse: collapse;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+th{
+background-color: #55a86d;
+color: white;
+text-align: left;
+padding: 15px;
+font-size: 16px;
+border: 1px solid #448d5a;
+}
+td{
+padding: 12px;
+border: 1px solid #eeeeee;
+color: #444;
+}
+tr:nth-child(even){
+background-color: #f9f9f9;
+}
+tr:nth-child(odd) {
+background-color: #ffffff;
+}
+tr:hover {
+background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+<h2>資工選課表</h2>
+<table>
+<thead>
+<tr>
+<th>開課單位</th>
+<th>課程名稱</th>
+<th>授課教師</th>
+</tr>
+</thead>
+<tbody>
+{% for course in courses %}
+<tr>
+<td>{{ course.Department }}</td>
+<td>{{ course.CourseTitle }}</td>
+<td>{{ course.Instructor }}</td>
+</tr>
+{% empty %}
+<tr>
+<td colspan="3" style="text-align:center;">目前尚無課程資料，請先執行 addcourse API</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>
