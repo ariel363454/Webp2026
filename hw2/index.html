@@ -59,4 +59,30 @@
         <hr>
         <button onclick="document.getElementById('courseModal').style.display='none'">關閉視窗</button>
     </div>
+    
+    <script>
+        function changeResult() {
+            var myTable = document.getElementById("csie");
+            if (myTable.rows.length > 1) {
+                myTable.rows[1].cells[2].innerHTML = "李春良";
+            }
+        }
 
+        function openCourseDetail(title, instructor, dept) {
+            var modal = document.getElementById("courseModal");
+            var content = document.getElementById("modalContent");
+
+            content.innerHTML = `
+                <p><strong>學年/學期：</strong> 114/2</p>
+                <p><strong>授課教師：</strong> ${instructor}</p>
+                <p><strong>開課單位：</strong> ${dept}</p>
+                <p><strong>課程名稱：</strong> ${title}</p>
+                <p><strong>開課序號：</strong> <span class="red-text">A2337</span></p>
+            `;
+
+            modal.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
