@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>ex#9: Using flickr API</title>
+    <style>
+        /* 參考簡報 Page 17 的照片牆樣式 */
+        .gallery {
+            --g: 6px; /* 間隔大小 */
+            display: grid;
+            width: 800px; /* 寬度可依螢幕調整 */
+            aspect-ratio: 1;
+            grid: auto-flow 1fr / repeat(3, 1fr);
+            gap: var(--g);
+            margin: 20px auto;
+        }
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* 預設灰階 */
+            cursor: pointer;
+            transition: .5s;
+        }
+        .gallery img:hover {
+            filter: grayscale(0%); /* 滑鼠移入恢復彩色 */
+        }
+        /* 簡報 Page 17 的特殊拼貼形狀設定 */
+        .gallery img:nth-child(2) {
+            grid-area: 1/2/span 2/span 2;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, calc(50% + var(--g)/4) 100%, 0 calc(50% - var(--g)/4));
+        }
+        .gallery img:nth-child(3) {
+            grid-area: 2/1/span 2/span 2;
+            clip-path: polygon(0 0, calc(50% - var(--g)/4) 0, 100% calc(50% + var(--g)/4), 100% 100%, 0 100%);
+        }
+        .btn-container { text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 18px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="btn-container">
+        <button onclick="getimg()">Get IMG</button>
+    </div>
+
+    <div id="gallery" class="gallery"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
